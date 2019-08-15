@@ -826,7 +826,7 @@ public final class BlockchainProcessorImpl implements BlockchainProcessor {
         if (block.getId() == 0L || blockDb.hasBlock(block.getId())) {
           throw new BlockNotAcceptedException("Duplicate block or invalid id for block " + block.getHeight());
         }
-        if (block.getHeight() > 40001L && !blockService.verifyGenerationSignature(block)) {
+        if (block.getHeight() > 40011L && !blockService.verifyGenerationSignature(block)) {
           throw new BlockNotAcceptedException("Generation signature verification failed for block " + block.getHeight());
         }
         if (!blockService.verifyBlockSignature(block)) {
