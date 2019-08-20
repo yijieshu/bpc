@@ -189,7 +189,6 @@ public class GeneratorImpl implements Generator {
 
     private void forge(BlockchainProcessor blockchainProcessor) throws BlockchainProcessor.BlockNotAcceptedException {
       Block lastBlock = blockchain.getLastBlock();
-
       int elapsedTime = timeService.getEpochTime() - lastBlock.getTimestamp();
       if (BigInteger.valueOf(elapsedTime).compareTo(deadline) > 0) {
         blockchainProcessor.generateBlock(secretPhrase, publicKey, nonce);

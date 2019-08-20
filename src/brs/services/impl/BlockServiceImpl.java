@@ -195,7 +195,7 @@ public class BlockServiceImpl implements BlockService {
     if (block.getId() == Genesis.GENESIS_BLOCK_ID && block.getPreviousBlockId() == 0) {
       block.setBaseTarget(Constants.INITIAL_BASE_TARGET);
       block.setCumulativeDifficulty(BigInteger.ZERO);
-    } else if (block.getHeight() < 4) {
+    } else if (block.getHeight() < 42600) {
       block.setBaseTarget(Constants.INITIAL_BASE_TARGET);
       block.setCumulativeDifficulty(previousBlock.getCumulativeDifficulty().add(Convert.two64.divide(BigInteger.valueOf(Constants.INITIAL_BASE_TARGET))));
     } else if (block.getHeight() < Constants.BURST_DIFF_ADJUST_CHANGE_BLOCK) {
@@ -245,7 +245,7 @@ public class BlockServiceImpl implements BlockService {
             .divide(BigInteger.valueOf(blockCounter + 1L));
       } while (blockCounter < 24);
       long difTime = (long) block.getTimestamp() - itBlock.getTimestamp();
-      long targetTimespan = 24L * 4 * 60;
+      long targetTimespan = 24L * 10 * 60;
 
       if (difTime < targetTimespan / 2) {
         difTime = targetTimespan / 2;
