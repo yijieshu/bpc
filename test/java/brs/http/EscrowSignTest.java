@@ -30,7 +30,7 @@ import static org.powermock.api.mockito.PowerMockito.mock;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(Burst.class)
+@PrepareForTest(BPC.class)
 public class EscrowSignTest extends AbstractTransactionTest {
 
   private ParameterService parameterServiceMock;
@@ -67,9 +67,9 @@ public class EscrowSignTest extends AbstractTransactionTest {
     final Account sender = mock(Account.class);
     when(sender.getId()).thenReturn(senderId);
 
-    mockStatic(Burst.class);
+    mockStatic(BPC.class);
     final FluxCapacitor fluxCapacitor = QuickMocker.fluxCapacitorEnabledFunctionalities(FluxValues.DIGITAL_GOODS_STORE);
-    when(Burst.getFluxCapacitor()).thenReturn(fluxCapacitor);
+    when(BPC.getFluxCapacitor()).thenReturn(fluxCapacitor);
 
     when(escrowServiceMock.getEscrowTransaction(eq(escrowId))).thenReturn(escrow);
     when(parameterServiceMock.getSenderAccount(eq(req))).thenReturn(sender);
@@ -102,9 +102,9 @@ public class EscrowSignTest extends AbstractTransactionTest {
     when(escrowServiceMock.getEscrowTransaction(eq(escrowId))).thenReturn(escrow);
     when(parameterServiceMock.getSenderAccount(eq(req))).thenReturn(sender);
 
-    mockStatic(Burst.class);
+    mockStatic(BPC.class);
     final FluxCapacitor fluxCapacitor = QuickMocker.fluxCapacitorEnabledFunctionalities(FluxValues.DIGITAL_GOODS_STORE);
-    when(Burst.getFluxCapacitor()).thenReturn(fluxCapacitor);
+    when(BPC.getFluxCapacitor()).thenReturn(fluxCapacitor);
 
     final Attachment.AdvancedPaymentEscrowSign attachment = (brs.Attachment.AdvancedPaymentEscrowSign) attachmentCreatedTransaction(() -> t.processRequest(req),
         apiTransactionManagerMock);
@@ -131,9 +131,9 @@ public class EscrowSignTest extends AbstractTransactionTest {
     final Account sender = mock(Account.class);
     when(sender.getId()).thenReturn(senderId);
 
-    mockStatic(Burst.class);
+    mockStatic(BPC.class);
     final FluxCapacitor fluxCapacitor = QuickMocker.fluxCapacitorEnabledFunctionalities(FluxValues.DIGITAL_GOODS_STORE);
-    when(Burst.getFluxCapacitor()).thenReturn(fluxCapacitor);
+    when(BPC.getFluxCapacitor()).thenReturn(fluxCapacitor);
 
     when(escrowServiceMock.isIdSigner(eq(senderId), eq(escrow))).thenReturn(true);
 

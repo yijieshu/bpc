@@ -1,6 +1,6 @@
 package it.common;
 
-import brs.Burst;
+import brs.BPC;
 import brs.common.TestInfrastructure;
 import brs.peer.Peers;
 import brs.peer.ProcessBlock;
@@ -29,14 +29,14 @@ public abstract class AbstractIT {
   @Before
   public void setUp() {
     mockStatic(Peers.class);
-    Burst.init(testProperties());
+    BPC.init(testProperties());
 
-    processBlock = new ProcessBlock(Burst.getBlockchain(), Burst.getBlockchainProcessor());
+    processBlock = new ProcessBlock(BPC.getBlockchain(), BPC.getBlockchainProcessor());
   }
 
   @After
   public void shutdown() {
-    Burst.shutdown(true);
+    BPC.shutdown(true);
   }
 
   private Properties testProperties() {
@@ -62,6 +62,6 @@ public abstract class AbstractIT {
   }
 
   public void rollback(int height) {
-    Burst.getBlockchainProcessor().popOffTo(0);
+    BPC.getBlockchainProcessor().popOffTo(0);
   }
 }

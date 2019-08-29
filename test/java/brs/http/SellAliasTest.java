@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(Burst.class)
+@PrepareForTest(BPC.class)
 public class SellAliasTest extends AbstractTransactionTest {
 
   private SellAlias t;
@@ -64,9 +64,9 @@ public class SellAliasTest extends AbstractTransactionTest {
     when(parameterServiceMock.getSenderAccount(req)).thenReturn(mockSender);
     when(parameterServiceMock.getAlias(req)).thenReturn(mockAlias);
 
-    mockStatic(Burst.class);
+    mockStatic(BPC.class);
     final FluxCapacitor fluxCapacitor = QuickMocker.fluxCapacitorEnabledFunctionalities(FluxValues.DIGITAL_GOODS_STORE);
-    when(Burst.getFluxCapacitor()).thenReturn(fluxCapacitor);
+    when(BPC.getFluxCapacitor()).thenReturn(fluxCapacitor);
 
     final Attachment.MessagingAliasSell attachment = (Attachment.MessagingAliasSell) attachmentCreatedTransaction(() -> t.processRequest(req), apiTransactionManagerMock);
     assertNotNull(attachment);

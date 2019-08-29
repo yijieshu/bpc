@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(Burst.class)
+@PrepareForTest(BPC.class)
 public class SetRewardRecipientTest extends AbstractTransactionTest {
 
   private SetRewardRecipient t;
@@ -59,9 +59,9 @@ public class SetRewardRecipientTest extends AbstractTransactionTest {
     when(parameterServiceMock.getAccount(eq(req))).thenReturn(mockSenderAccount);
     when(accountServiceMock.getAccount(eq(123L))).thenReturn(mockRecipientAccount);
 
-    mockStatic(Burst.class);
+    mockStatic(BPC.class);
     final FluxCapacitor fluxCapacitor = QuickMocker.fluxCapacitorEnabledFunctionalities(FluxValues.DIGITAL_GOODS_STORE);
-    when(Burst.getFluxCapacitor()).thenReturn(fluxCapacitor);
+    when(BPC.getFluxCapacitor()).thenReturn(fluxCapacitor);
 
     final Attachment.BurstMiningRewardRecipientAssignment attachment = (Attachment.BurstMiningRewardRecipientAssignment) attachmentCreatedTransaction(() -> t.processRequest(req), apiTransactionManagerMock);
     assertNotNull(attachment);

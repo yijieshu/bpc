@@ -27,7 +27,7 @@ import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(Burst.class)
+@PrepareForTest(BPC.class)
 public class DGSFeedbackTest extends AbstractTransactionTest {
 
   private DGSFeedback t;
@@ -67,9 +67,9 @@ public class DGSFeedbackTest extends AbstractTransactionTest {
     when(mockPurchase.getEncryptedGoods()).thenReturn(mockEncryptedGoods);
     when(mockPurchase.getSellerId()).thenReturn(2L);
 
-    mockStatic(Burst.class);
+    mockStatic(BPC.class);
     final FluxCapacitor fluxCapacitor = QuickMocker.fluxCapacitorEnabledFunctionalities(FluxValues.DIGITAL_GOODS_STORE);
-    when(Burst.getFluxCapacitor()).thenReturn(fluxCapacitor);
+    when(BPC.getFluxCapacitor()).thenReturn(fluxCapacitor);
 
     final Attachment.DigitalGoodsFeedback attachment = (Attachment.DigitalGoodsFeedback) attachmentCreatedTransaction(() -> t.processRequest(req), apiTransactionManagerMock);
     assertNotNull(attachment);

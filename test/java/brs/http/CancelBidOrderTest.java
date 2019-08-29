@@ -27,7 +27,7 @@ import static org.powermock.api.mockito.PowerMockito.mock;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(Burst.class)
+@PrepareForTest(BPC.class)
 public class CancelBidOrderTest extends AbstractTransactionTest {
 
   private CancelBidOrder t;
@@ -65,9 +65,9 @@ public class CancelBidOrderTest extends AbstractTransactionTest {
     when(mockAccount.getId()).thenReturn(senderAccountId);
     when(parameterServiceMock.getSenderAccount(eq(req))).thenReturn(mockAccount);
 
-    mockStatic(Burst.class);
+    mockStatic(BPC.class);
     final FluxCapacitor fluxCapacitor = QuickMocker.fluxCapacitorEnabledFunctionalities(FluxValues.DIGITAL_GOODS_STORE);
-    when(Burst.getFluxCapacitor()).thenReturn(fluxCapacitor);
+    when(BPC.getFluxCapacitor()).thenReturn(fluxCapacitor);
 
     final Attachment.ColoredCoinsBidOrderCancellation attachment = (brs.Attachment.ColoredCoinsBidOrderCancellation) attachmentCreatedTransaction(() -> t.processRequest(req), apiTransactionManagerMock);
     assertNotNull(attachment);

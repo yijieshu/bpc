@@ -1,8 +1,8 @@
 package brs.http;
 
 import brs.Attachment;
+import brs.BPC;
 import brs.Blockchain;
-import brs.Burst;
 import brs.BurstException;
 import brs.common.QuickMocker;
 import brs.common.QuickMocker.MockParam;
@@ -29,7 +29,7 @@ import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(Burst.class)
+@PrepareForTest(BPC.class)
 public class SetAliasTest extends AbstractTransactionTest {
 
   private SetAlias t;
@@ -59,9 +59,9 @@ public class SetAliasTest extends AbstractTransactionTest {
         new MockParam(ALIAS_URI_PARAMETER, aliasUrl)
     );
 
-    mockStatic(Burst.class);
+    mockStatic(BPC.class);
     final FluxCapacitor fluxCapacitor = QuickMocker.fluxCapacitorEnabledFunctionalities(FluxValues.DIGITAL_GOODS_STORE);
-    when(Burst.getFluxCapacitor()).thenReturn(fluxCapacitor);
+    when(BPC.getFluxCapacitor()).thenReturn(fluxCapacitor);
 
     final Attachment.MessagingAliasAssignment attachment = (Attachment.MessagingAliasAssignment) attachmentCreatedTransaction(() -> t.processRequest(req), apiTransactionManagerMock);
     assertNotNull(attachment);

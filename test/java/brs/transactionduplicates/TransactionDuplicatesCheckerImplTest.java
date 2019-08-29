@@ -3,8 +3,8 @@ package brs.transactionduplicates;
 import brs.Attachment.AdvancedPaymentEscrowResult;
 import brs.Attachment.AdvancedPaymentSubscriptionSubscribe;
 import brs.Attachment.MessagingAliasSell;
+import brs.BPC;
 import brs.BlockchainImpl;
-import brs.Burst;
 import brs.BurstException.NotValidException;
 import brs.Escrow.DecisionType;
 import brs.Transaction;
@@ -27,20 +27,20 @@ import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(Burst.class)
+@PrepareForTest(BPC.class)
 public class TransactionDuplicatesCheckerImplTest {
 
   private TransactionDuplicatesCheckerImpl t = new TransactionDuplicatesCheckerImpl();
 
   @Before
   public void setUp() {
-    mockStatic(Burst.class);
+    mockStatic(BPC.class);
 
     final FluxCapacitor mockFluxCapacitor = QuickMocker.fluxCapacitorEnabledFunctionalities(FluxValues.PRE_DYMAXION);
-    when(Burst.getFluxCapacitor()).thenReturn(mockFluxCapacitor);
+    when(BPC.getFluxCapacitor()).thenReturn(mockFluxCapacitor);
     BlockchainImpl mockBlockchain = mock(BlockchainImpl.class);
     when(mockBlockchain.getHeight()).thenReturn(4);
-    when(Burst.getBlockchain()).thenReturn(mockBlockchain);
+    when(BPC.getBlockchain()).thenReturn(mockBlockchain);
 
     TransactionType.init(mockBlockchain, mockFluxCapacitor, null, null, null, null, null, null);
 
